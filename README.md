@@ -255,6 +255,7 @@ z(3, 5); // z 호출 / 8
 
 
 
+
 ## Promise 프로미스
 
 * 내용이 실행은 되었지만 결과를 아직 반환하지 않은 객체 <br>
@@ -300,5 +301,62 @@ Promise.allSettled{[p1, p2, p3]).then((results) => {}).catch((error) => {}).fina
 try {} catch (err) {}  finally {}
 ```
 <br><br><br>
+
+
+
+### Promise then은  async / await 로 가능!
+- await = then / (async안에 await 있음)
+- 변수 = await 프로미스;인 경우 프로미스가 resolve된 값이 변수에 저장
+- 변수 await 값; 인 경우 그 값이 변수에 저장
+- 오른쪽에서 왼쪽으로 읽어야함
+<br><br>
+await은 then(resolve)의 기능만 수행하고있어서 reject를 처리하려면 <br>
+try{ await ~ }catch(error){ ~에러야~ } 가 필요함
+<br>
+
+```Javascript
+// async/await 사용
+async function findAdnSaveUser(Users) {
+  let user = await Users.findOne({});
+  user.name = 'zero';
+  user = await user.save();
+  user = awwait Users.findOne({ gender: 'm' });
+  // 생략
+}
+
+// try{} catch(error){} 사용
+async function main() {
+  try {
+    const result = await promise;
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+  
+}
+main().then((name) => ...)
+const name = await main();
+```
+
+<br><br><br>
+
+### for await of
+* for await (변수 of 프로미스배얼)
+* resolve된 프로미스가 변수에 담겨 나옴
+* await을 사용하기 때문에 async 함수 안에서 해야함
+
+
+```Javascript
+const promise1 = Promise.resolve('성공1');
+const promise2 = Promise.resolve('성공2');
+
+(async () => {
+  for await (promise of [promise1, promise2]) {
+    console.log(promise);
+  }
+})();
+```
+
+
 
  # 공부중,,,
