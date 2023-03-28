@@ -223,7 +223,7 @@ obj.sayName(); // '' , 여기서 this는 window
 ```Javascript
 
 const x = true;
-const y = false;
+let y = false;
 
 function a() {
   let a = 4;
@@ -232,20 +232,73 @@ function a() {
     let a = 3;
     for (let i = 0; i < 0;  i++){
       console.log(i);
-    }
+    } // for 문에서 변수를 공유하고싶다면 부모선언에 빼기
     if (!y){
       kkk();
     }
   }
-  z(); // 에러 
+  //z(); // 에러 
 }
 
 a();
-const z = () => {};
+const z = (a, b) => { return a + b}; //TDZ / z선언
+z(3, 5); // z 호출 / 8
 ```
-<img src="https://user-images.githubusercontent.com/45233490/226813734-12fe017a-9dc1-49ca-95cd-1a947e0770ed.png" width="450"/>
-* 선언지도 그리기 전에 호이스팅 되는 애들 있나 살펴보기
+<img src="https://user-images.githubusercontent.com/45233490/226826385-48724dbe-5240-4fb2-90de-9ae698ccd888.png" width="450"/><br>
+* 선언지도 그리기 전에 호이스팅 되는 애들 있나 살펴보기 (functuib a)
+* a함수에서 z를 호출할때 z가 선언전이기때문에 에러남
+* 매개변수도 변수임
 
 
 
-# 공부중,,,
+<br><br><br>
+
+
+
+## Promise 프로미스
+
+* 내용이 실행은 되었지만 결과를 아직 반환하지 않은 객체 <br>
+#### = 코드가 실행되었지만 결과값을 나중에 쓸수있음 !!! '_' b
+```Javascript
+const condition = true; // true면 resolve, false면 reject
+const promise = new Promise((resolve, reject) => {
+  if (condition) {
+    resolve('성공');
+  } else {
+    reject('실패');
+  }
+});
+
+// 딴짓딴짓~
+
+promise
+  .then((message) => {
+    console.log(message); // 성공(resolve)한 경우 실행
+  })
+  .catch((error) => {
+    console.error(error); // 실패(reject)한 경우 실행
+  })
+```
+
+<br><br>
+
+### Promise  ->   all 과 allSettled
+
+```Javascript
+const p1 = axios.get('서버주소1') // 성공
+const p2 = axios.get('서버주소2') // 성공
+const p3 = axios.get('서버주소3') // 성공
+
+// all = 배열중 하나만 실패해도 에러로 넘어감
+Promise.all{[p1, p2, p3]).then((results) => {}).catch((error) => {});
+
+// allSettled = 실패한 것만 필터링해서 다시 시도 / allSettled만 쓰기!!! 
+Promise.allSettled{[p1, p2, p3]).then((results) => {}).catch((error) => {}).finally(() => {});
+
+// finally = then이든 catch이든 쨋든 최종적으로 실행하는것
+
+try {} catch (err) {}  finally {}
+```
+<br><br><br>
+
+ # 공부중,,,
