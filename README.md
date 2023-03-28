@@ -213,7 +213,7 @@ obj.sayName(); // '' , 여기서 this는 window
 
 
 
-
+<br><br><br>
 
 
 
