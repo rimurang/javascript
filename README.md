@@ -259,7 +259,7 @@ z(3, 5); // z 호출 / 8
 ## Promise 프로미스
 
 * 내용이 실행은 되었지만 결과를 아직 반환하지 않은 객체 <br>
-#### = 코드가 실행되었지만 결과값을 나중에 쓸수있음 !!! '_' b
+#### = 실행되었지만 결과값을 나중에 쓸수있음 !!! '_' b
 ```Javascript
 const condition = true; // true면 resolve, false면 reject
 const promise = new Promise((resolve, reject) => {
@@ -368,6 +368,7 @@ const promise2 = Promise.resolve('성공2');
 ## 비동기
 * 한번 비동기는 영원한 비동기 (비동기 > 동기 바꾸기 X)
 * 비동기는 코드순서와 실행순서와 다름 (동기코드는 위>아래, 왼>오)
+* 비동기는 동시의 문제가 아님 (순서의 문제)
 <br>
 
 <strong>비동기는 동시의 문제가 아니라 순서의 문제 !!!</strong>
@@ -375,7 +376,7 @@ const promise2 = Promise.resolve('성공2');
 <br>
 
 ```
-// setTimeout은 비동기함수 
+// setTimeout은 비동기
 setTimeout(() => {
   console.log('a');
 }, 0);
@@ -390,15 +391,19 @@ setTimeout(() => {
   -> 그래서 '이벤트루프(E.L)' 등장!
 <br><br>
 
+<img src="https://user-images.githubusercontent.com/45233490/230810475-d3c52279-e939-49d5-a564-fc944234ecd1.png" width="450"/><br>
+
+
 ▶  제로초의 비법으로 분석가능! *_* (추상적 개념)
 * 백그라운드(BG)
-  - 자바스크립트 X,  다른언어로 돌아가는 부분이라고 생각하기
-  - <u>동시에 돌아가는것 가능</u> (예: setTimeout 시간초를 동시에 셈)
+  - 자바스크립트 X,  비동기들만의 세상
+  - <u>비동기들이 동시에 돌아갈수있는 공간</u> (예: setTimeout 시간초를 동시에 셈)
   - setTimeout 타이머, promise, eventListner ... (비동기인애들이 한번씩 거쳐간다고 생각하면됨)
   - 백그라운드에 올라온 코드들은 태스크'큐'(= 매크로태스크큐, 마이크로태스크큐)를 거쳐야함
 * 매크로태스크큐(M)
 * 마이크로태스크큐(m)
   - promise ... (나머지는 매크로)
+  - 매크로보다 우선순위 높음 ↑
 <br>
 =>위 분석을 하면 비동기코드를 동기처럼 보는것이 가능해짐
 
