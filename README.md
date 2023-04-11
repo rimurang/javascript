@@ -358,7 +358,40 @@ const promise2 = Promise.resolve('성공2');
 ```
 
 
+#### ▶  aysnc/await을 Promise로 바꿔보기
 
+```Javascript
+async function a(){
+  const a = await 1;
+  console.log('a',a);
+  console.log('hmm');
+  await null;
+  const b = await Promise.resolve(1);
+  console.log('b',b);
+  return b;
+}
+
+//////////
+
+Promise.resolve(1)
+  .then((a) => {
+      console.log('a',a);
+      console.log('hmm');
+      return null;
+  })
+  .then(() => {
+    return Promise.resolve(1);
+  })
+  .then((b) => {
+    console.log('b',b);
+    return b;
+  })
+```
+
+* async를 promise로 바꾸려면 await이 기준
+* await은 then이다!
+* async 함수는 오른쪽에서 왼쪽으로 ←
+* promise는 왼쪽에서 오른쪽 →, 위에서 아래로 ↓
 
 <br><br><br>
 
@@ -394,7 +427,7 @@ setTimeout(() => {
 <img src="https://user-images.githubusercontent.com/45233490/230810475-d3c52279-e939-49d5-a564-fc944234ecd1.png" width="450"/><br>
 
 
-▶  제로초의 비법으로 분석가능! *_* (추상적 개념)
+#### ▶  제로초의 비법으로 분석가능! *_* (추상적 개념)
 * 백그라운드(BG)
   - 자바스크립트 X,  비동기들만의 세상
   - <u>비동기들이 동시에 돌아갈수있는 공간</u> (예: setTimeout 시간초를 동시에 셈)
