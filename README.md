@@ -1,3 +1,5 @@
+<br><br>
+
 ## 배열의 평균값
 
 <a href="https://school.programmers.co.kr/learn/courses/30/lessons/120817" target="_blank" title="배열의 평균값">https://school.programmers.co.kr/learn/courses/30/lessons/120817</a>
