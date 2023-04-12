@@ -1,7 +1,7 @@
-[공부 자료]
-인간 JS 엔진 되기 | 유튜브 강좌
+<strong>[공부 자료]</strong>
+<a href="https://www.youtube.com/watch?v=NS1cIsWlFGI&list=PLcqDmjxt30Rt9wmSlw1u6sBYr-aZmpNB3" title="인간 JS 엔진 되기 | 유튜브 강좌">인간 JS 엔진 되기 | 유튜브 강좌</a>
 
-
+<br><br><br><br>
 
 
 # 공부내용 정리
