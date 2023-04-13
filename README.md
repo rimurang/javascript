@@ -376,7 +376,8 @@ const promise2 = Promise.resolve('성공2');
 
 
 
-## 비동기
+## 비동기 (동기가 아니다)
+* XXX 여러개가 동시에 돌아간다 XXX
 * 한번 비동기는 영원한 비동기 (비동기 > 동기 바꾸기 X)
 * 비동기는 코드순서와 실행순서와 다름 (동기코드는 위>아래, 왼>오)
 * 비동기는 동시의 문제가 아님 (순서의 문제)
@@ -386,7 +387,7 @@ const promise2 = Promise.resolve('성공2');
 
 <br>
 
-```
+```Javascript
 // setTimeout은 비동기
 setTimeout(() => {
   console.log('a');
@@ -420,7 +421,27 @@ setTimeout(() => {
 
 
 
+#### ▶  퀴-즈
+
+뭘까-요
+```Javascript
+let a = 2;
+setTimeout(() => {
+  a = 5; // undefined
+  console.log(a); // log: a는 누굴말하는거지?
+}, 0)
+console.log(a);
+
+// 정답 : 2
+// 5도 찍히지만 undefined..
+// 왜냐하면 ↓↓↓↓↓
+```
+* 한번 비동기 코드로 들어간 애는 그 안에서만 써야함
+* setTimeout에서 a를 쓰려면 안에서 따로 변수정의해줘야함
+* 맨위 a와 setTimeout 비동기함수 안에서의 a 는 다름
 
 
 
-공부중,,,
+
+
+2-3공부중,,,
