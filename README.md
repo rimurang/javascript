@@ -63,7 +63,8 @@ c(); // c
 
 
 <br><br><br>
-
+<hr>
+<br><br><br>
 
 
 
@@ -144,8 +145,11 @@ c();
 
 1. b 안에 a 없음 <br>
 2. c 안에 a 없음 <br>
-3. anony 안에 a 있음 <br><br>
+3. anony 안에 a 있음 <br>
 
+<br><br><br>
+<hr>
+<br><br><br>
 
 ## this
 this 는 기본적으로 window
@@ -214,6 +218,8 @@ obj.sayName(); // '' , 여기서 this는 window
 
 
 <br><br><br>
+<hr>
+<br><br><br>
 
 
 
@@ -251,9 +257,10 @@ z(3, 5); // z 호출 / 8
 
 
 
+
 <br><br><br>
-
-
+<hr>
+<br><br><br>
 
 
 ## Promise 프로미스
@@ -340,7 +347,7 @@ async function main(){
 main().then((name) => ...)
 ```
 
-<br><br><br>
+<br><br>
 
 ### for await (변수 of 프로미스배열)
 * promise 반복할때 사용 (for문이라고 생각하면됨)
@@ -359,20 +366,28 @@ const promise2 = Promise.resolve('성공2');
 })();
 ```
 
+
+<br><br><br>
+<hr>
 <br><br><br>
 
 
 
 
-## 비동기
 
-* 한번 비동기는 영원한 비동기 
-* 비동기는 동시의 문제가 아니라 순서의 문제
-#### !!! (비동기를 동기로 바꿀수없음)
+
+## 비동기
+* 한번 비동기는 영원한 비동기 (비동기 > 동기 바꾸기 X)
+* 비동기는 코드순서와 실행순서와 다름 (동기코드는 위>아래, 왼>오)
+* 비동기는 동시의 문제가 아님 (순서의 문제)
+<br>
+
+<strong>비동기는 동시의 문제가 아니라 순서의 문제 !!!</strong>
 
 <br>
 
-```Javascript
+```
+// setTimeout은 비동기
 setTimeout(() => {
   console.log('a');
 }, 0);
@@ -383,7 +398,29 @@ setTimeout(() => {
   console.log('c');
 }, 2000);
 ```
- 
+* 비동기에서는 우리가 그리던 호출스택, 선언지도만으로는 분석을 할수없음
+  -> 그래서 '이벤트루프(E.L)' 등장!
+<br><br>
+
+<img src="https://user-images.githubusercontent.com/45233490/230810475-d3c52279-e939-49d5-a564-fc944234ecd1.png" width="450"/><br>
 
 
- # 공부중,,,
+#### ▶  제로초의 비법으로 분석가능! *_* (추상적 개념)
+* 백그라운드(BG)
+  - 자바스크립트 X,  비동기들만의 세상
+  - <u>비동기들이 동시에 돌아갈수있는 공간</u> (예: setTimeout 시간초를 동시에 셈)
+  - setTimeout 타이머, promise, eventListner ... (비동기인애들이 한번씩 거쳐간다고 생각하면됨)
+  - 백그라운드에 올라온 코드들은 태스크'큐'(= 매크로태스크큐, 마이크로태스크큐)를 거쳐야함
+* 매크로태스크큐(M)
+* 마이크로태스크큐(m)
+  - promise ... (나머지는 매크로)
+  - 매크로보다 우선순위 높음 ↑
+<br>
+=>위 분석을 하면 비동기코드를 동기처럼 보는것이 가능해짐
+
+
+
+
+
+
+공부중,,,
