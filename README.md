@@ -1,9 +1,3 @@
-<strong>[공부 자료]</strong>
-<a href="https://www.youtube.com/watch?v=NS1cIsWlFGI&list=PLcqDmjxt30Rt9wmSlw1u6sBYr-aZmpNB3" title="인간 JS 엔진 되기 | 유튜브 강좌">인간 JS 엔진 되기 | 유튜브 강좌</a>
-
-<br><br><br><br>
-
-
 # 공부내용 정리
 
 <br><br>
@@ -265,7 +259,7 @@ z(3, 5); // z 호출 / 8
 ## Promise 프로미스
 
 * 내용이 실행은 되었지만 결과를 아직 반환하지 않은 객체 <br>
-#### = 실행되었지만 결과값을 나중에 쓸수있음 !!! '_' b
+#### = 코드가 실행되었지만 결과값을 나중에 쓸수있음 !!! '_' b
 ```Javascript
 const condition = true; // true면 resolve, false면 reject
 const promise = new Promise((resolve, reject) => {
@@ -278,6 +272,7 @@ const promise = new Promise((resolve, reject) => {
 
 // 딴짓딴짓~
 
+// 이제 결괏값 사용할래!
 promise
   .then((message) => {
     console.log(message); // 성공(resolve)한 경우 실행
@@ -293,14 +288,18 @@ promise
 
 ```Javascript
 const p1 = axios.get('서버주소1') // 성공
-const p2 = axios.get('서버주소2') // 성공
+const p2 = axios.get('서버주소2') // 실패
 const p3 = axios.get('서버주소3') // 성공
 
 // all = 배열중 하나만 실패해도 에러로 넘어감
-Promise.all{[p1, p2, p3]).then((results) => {}).catch((error) => {});
+// 어디서어떻게 실패한건지 안 뜸 (성공한것까지 취소해서 다시 시도해야하는 번거로움)
+// all에서 에러나도 catch, then에서 에러나도 catch
+Promise.all([p1, p2, p3]).then((results) => {}).catch((error) => {});
 
-// allSettled = 실패한 것만 필터링해서 다시 시도 / allSettled만 쓰기!!! 
-Promise.allSettled{[p1, p2, p3]).then((results) => {}).catch((error) => {}).finally(() => {});
+// allSettled = 실패한 것만 필터링해서 다시 시도 / ★ allSettled만 쓰기!!!
+// allSettled에서 에러나도 catch, then에서 에러나도 catch 
+Promise.allSettled([p1, p2, p3]).then((results) => {}).catch((error) => {}).finally(() => {});
+
 
 // finally = then이든 catch이든 쨋든 최종적으로 실행하는것
 
@@ -313,6 +312,7 @@ try {} catch (err) {}  finally {}
 ### Promise then은  async / await 로 가능!
 - await = then / (async안에 await 있음)
 - 변수 = await 프로미스;인 경우 프로미스가 resolve된 값이 변수에 저장
+- ★ async/await는 resolve만 취급해서 try/catch 사용하여 reject문도 해줘야함
 - 변수 await 값; 인 경우 그 값이 변수에 저장
 - 오른쪽에서 왼쪽으로 읽어야함
 <br><br>
@@ -321,33 +321,29 @@ try{ await ~ }catch(error){ ~에러야~ } 가 필요함
 <br>
 
 ```Javascript
-// async/await 사용
-async function findAdnSaveUser(Users) {
-  let user = await Users.findOne({});
-  user.name = 'zero';
-  user = await user.save();
-  user = awwait Users.findOne({ gender: 'm' });
-  // 생략
-}
+// promise ~ then
+const promise = new Promise(...)
 
-// try{} catch(error){} 사용
-async function main() {
+promise.then((result) => ...)
+
+
+// async ~ await
+async function main(){
   try {
     const result = await promise;
     return result;
-  } catch (error) {
-    console.error(error);
+  } catch(error) {
+    console.log(error);
   }
-  
 }
+
 main().then((name) => ...)
-const name = await main();
 ```
 
 <br><br><br>
 
-### for await of
-* for await (변수 of 프로미스배얼)
+### for await (변수 of 프로미스배열)
+* promise 반복할때 사용 (for문이라고 생각하면됨)
 * resolve된 프로미스가 변수에 담겨 나옴
 * await을 사용하기 때문에 async 함수 안에서 해야함
 
@@ -363,59 +359,20 @@ const promise2 = Promise.resolve('성공2');
 })();
 ```
 
-
-#### ▶  aysnc/await을 Promise로 바꿔보기
-
-```Javascript
-async function a(){
-  const a = await 1;
-  console.log('a',a);
-  console.log('hmm');
-  await null;
-  const b = await Promise.resolve(1);
-  console.log('b',b);
-  return b;
-}
-
-//////////
-
-Promise.resolve(1)
-  .then((a) => {
-      console.log('a',a);
-      console.log('hmm');
-      return null;
-  })
-  .then(() => {
-    return Promise.resolve(1);
-  })
-  .then((b) => {
-    console.log('b',b);
-    return b;
-  })
-```
-
-* async를 promise로 바꾸려면 await이 기준
-* await은 then이다!
-* async 함수는 오른쪽에서 왼쪽으로 ←
-* promise는 왼쪽에서 오른쪽 →, 위에서 아래로 ↓
-
 <br><br><br>
 
 
 
 
 ## 비동기
-* 한번 비동기는 영원한 비동기 (비동기 > 동기 바꾸기 X)
-* 비동기는 코드순서와 실행순서와 다름 (동기코드는 위>아래, 왼>오)
-* 비동기는 동시의 문제가 아님 (순서의 문제)
-<br>
 
-<strong>비동기는 동시의 문제가 아니라 순서의 문제 !!!</strong>
+* 한번 비동기는 영원한 비동기 
+* 비동기는 동시의 문제가 아니라 순서의 문제
+#### !!! (비동기를 동기로 바꿀수없음)
 
 <br>
 
-```
-// setTimeout은 비동기
+```Javascript
 setTimeout(() => {
   console.log('a');
 }, 0);
@@ -426,29 +383,7 @@ setTimeout(() => {
   console.log('c');
 }, 2000);
 ```
-* 비동기에서는 우리가 그리던 호출스택, 선언지도만으로는 분석을 할수없음
-  -> 그래서 '이벤트루프(E.L)' 등장!
-<br><br>
-
-<img src="https://user-images.githubusercontent.com/45233490/230810475-d3c52279-e939-49d5-a564-fc944234ecd1.png" width="450"/><br>
-
-
-#### ▶  제로초의 비법으로 분석가능! *_* (추상적 개념)
-* 백그라운드(BG)
-  - 자바스크립트 X,  비동기들만의 세상
-  - <u>비동기들이 동시에 돌아갈수있는 공간</u> (예: setTimeout 시간초를 동시에 셈)
-  - setTimeout 타이머, promise, eventListner ... (비동기인애들이 한번씩 거쳐간다고 생각하면됨)
-  - 백그라운드에 올라온 코드들은 태스크'큐'(= 매크로태스크큐, 마이크로태스크큐)를 거쳐야함
-* 매크로태스크큐(M)
-* 마이크로태스크큐(m)
-  - promise ... (나머지는 매크로)
-  - 매크로보다 우선순위 높음 ↑
-<br>
-=>위 분석을 하면 비동기코드를 동기처럼 보는것이 가능해짐
 
 
 
-
-
-
- # 비동기/동기 공부중,,,
+ # 공부중,,,
