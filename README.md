@@ -412,33 +412,79 @@ setTimeout(() => {
   - <u>비동기들이 동시에 돌아갈수있는 공간</u> (예: setTimeout 시간초를 동시에 셈)
   - setTimeout 타이머, eventListner ... (비동기인애들이 한번씩 거쳐간다고 생각하면됨)
   - 백그라운드에 올라온 코드들은 태스크'큐'(= 매크로태스크큐, 마이크로태스크큐)를 거쳐야함
-* 매크로태스크큐(M)
+* 매크로태스크큐(M)<br>
+  - 마이크로큐가 끝나면 매크로큐 실행
 * 마이크로태스크큐(m)
   - promise ... (나머지는 매크로)
   - 매크로보다 우선순위 높음 ↑
 <br>
+
 =>위 분석을 하면 비동기코드를 동기처럼 보는것이 가능해짐
 
+##### ★ 매크로태스크큐 & <u>마이크로태스크큐</u> 작동순서 확인해보기 ★
+<br>
 
+```Javascript
+setTimeout(() => {
+  console.log('a');
+}, 0);
+setTimeout(() => {
+  console.log('b');
+}, 1000);
+Promise.resolve().then(() => {
+  console.log('p');
+})
+// (순서대로) p, a, b
+```
 
-#### ▶  퀴-즈
+<br><br>
+
+#### ▶  퀴-즈 1
 
 뭘까-요
 ```Javascript
-let a = 2;
+let a = 2; 
 setTimeout(() => {
-  a = 5; // undefined
-  console.log(a); // log: a는 누굴말하는거지?
-}, 0)
-console.log(a);
+  a = 5; // 전역변수 a를 5로 재할당
+  console.log(a); // 5
+  a = 10; // 전역변수 a를 10으로 재할당
+  console.log(a); // 10
+}, 0);
 
-// 정답 : 2
-// 5도 찍히지만 undefined..
-// 왜냐하면 ↓↓↓↓↓
+console.log(a); // 2 . 동기 코드 이기때문에 냅다 실행
+
+// 정답 : 2 , 5 , 10
+// 풀이 ↓↓↓↓↓
 ```
-* 한번 비동기 코드로 들어간 애는 그 안에서만 써야함
-* setTimeout에서 a를 쓰려면 안에서 따로 변수정의해줘야함
-* 맨위 a와 setTimeout 비동기함수 안에서의 a 는 다름
+* 전역변수 a를 비동기코드 안에서 활용 가능 함
+
+<br>
+
+#### ▶  퀴-즈 2
+
+뭘까-요
+```Javascript
+setTimeout(() => {
+  let a = 2;
+  a = 5; 
+  console.log(a); // 5
+}, 0);
+
+setTimeout(() => {
+  a = 10; 
+  console.log(a); // a is not defined
+}, 1000);
+
+console.log(a); // a 선언 안됨
+ 
+
+// 정답 : a is not defined , 5 , 10
+// 정답('use strict'모드) : a is not defined , 5 , a is not defined
+// 풀이 ↓↓↓↓↓
+```
+* setT1000에서 a는 10으로 출력 되지만 'use strict' 모드에서는 정의되지 않았다고 출력 = 잘못된 코드
+* 비동기코드 안에서 선언된 것은 다른곳에서 사용 X
+
 
 
 
