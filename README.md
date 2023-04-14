@@ -365,9 +365,28 @@ const promise2 = Promise.resolve('성공2');
   }
 })();
 ```
+<br><br>
 
+### await 줄줄이 소시지 금지!!!!
+```Javascript
+// await 줄줄소시지 나쁜 예
+async function a() {
+  await delayP(3000); // 3초
+  await delayP(6000); // 6초
+  await delayP(9000); // 9초
+} // 토탈 18초
 
-<br><br><br>
+// 좋은 예
+async function b() {
+  const p1 = await delayP(3000); // 3초
+  const p2 = await delayP(6000); // 6초
+  await Promise.allSettled([p1, p2]); // 6초
+  await delayP(9000); // 9초
+} // 토탈 15초
+
+```
+
+<br><br>
 <hr>
 <br><br><br>
 
