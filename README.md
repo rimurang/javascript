@@ -291,7 +291,7 @@ promise
 
 <br><br>
 
-### Promise  ->   all 과 allSettled
+### ▶ Promise  ->   all 과 allSettled
 
 ```Javascript
 const p1 = axios.get('서버주소1') // 성공
@@ -316,7 +316,8 @@ try {} catch (err) {}  finally {}
 
 
 
-### Promise then은  async / await 로 가능!
+### ▶ Promise then은  async / await 로 가능!
+
 - await = then / (async안에 await 있음)
 - 변수 = await 프로미스;인 경우 프로미스가 resolve된 값이 변수에 저장
 - ★ async/await는 resolve만 취급해서 try/catch 사용하여 reject문도 해줘야함
@@ -349,7 +350,8 @@ main().then((name) => ...)
 
 <br><br>
 
-### for await (변수 of 프로미스배열)
+### ▶ for await (변수 of 프로미스배열)
+
 * promise 반복할때 사용 (for문이라고 생각하면됨)
 * resolve된 프로미스가 변수에 담겨 나옴
 * await을 사용하기 때문에 async 함수 안에서 해야함
@@ -367,7 +369,8 @@ const promise2 = Promise.resolve('성공2');
 ```
 <br><br>
 
-### await 줄줄이 소시지 금지!!!!
+### ▶ await 줄줄이 소시지 금지!!!!
+
 ```Javascript
 // await 줄줄소시지 나쁜 예
 async function a() {
@@ -380,11 +383,53 @@ async function a() {
 async function b() {
   const p1 = await delayP(3000); // 3초
   const p2 = await delayP(6000); // 6초
-  await Promise.allSettled([p1, p2]); // 6초
+  await Promise.allSettled([p1, p2]); // 6초 (BG에서 동시(?) 실행 하기 때문에)
   await delayP(9000); // 9초
 } // 토탈 15초
+```
+<br>
+<br>
+
+
+
+### ▶ await 줄줄이 소시지 분류하여 묶기 - 실무예제
+
+게시글 작성에대한 예제
+
+```Javascript
+// 변화 전 
+async function createPost() {
+  const post = await db.getPost(); // 게시물 조회
+  if (post) {
+    res.status(403).send('이미 게시글이 존재합니다.');
+  } else {
+    await db.createPost(); // 게시글 작성
+
+    await db.userIncrementPostCount(); // 사용자에 작성글 카운트 1 올림
+    await db.createNoti(); // 새로운 게시글 알림 동록
+  }
+}
+
+
+// 변화 후 
+async function createPost() {
+  const post = await db.getPost(); // 게시물 조회
+  if (post) {
+    res.status(403).send('이미 게시글이 존재합니다.');
+  } else {
+    await db.createPost(); // 게시글 작성
+    
+    const board1 = await db.userIncrementPostCount(); // 사용자에 작성글 카운트 1 올림
+    const board2 = await db.createNoti(); // 새로운 게시글 알림 동록
+    await Promise.allSettled([board1, board2]);
+  }
+}
 
 ```
+
+* 순차적으로 할 필요없는 애들 묶기 (작성글 카운트 +1, 새로운 게시글 알림 동록)
+
+=> 시간 단축 효과 
 
 <br><br>
 <hr>
@@ -509,4 +554,3 @@ console.log(a); // a 선언 안됨
 
 
 
-2-3공부중,,,
