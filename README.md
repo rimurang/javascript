@@ -79,7 +79,52 @@ function solution(array) {
 ```
 
 
+<hr>
+
+<br><br><br>
+
+## 문자열 섞기
+
+<a href="https://school.programmers.co.kr/learn/courses/30/lessons/181942" target="_blank" title="문자열  섞기">https://school.programmers.co.kr/learn/courses/30/lessons/181942</a>
+
+#### ▶ 문제 설명
+길이가 같은 두 문자열 str1과 str2가 주어집니다.<br>
+두 문자열의 각 문자가 앞에서부터 서로 번갈아가면서 한 번씩 등장하는 문자열을 만들어 return 하는 solution 함수를 완성해 주세요.
+* str1 = "aaaaa"
+* str2 = "bbbbb"
+* result = "ababababab"
+<br>
+
+#### ▶ 제한
+* 1 ≤ str1의 길이 = str2의 길이 ≤ 10
+* str1과 str2는 알파벳 소문자로 이루어진 문자열입니다.
+
+
+```Javascript
+function solution(str1, str2) {
+    
+    let str1Spl = str1.split('');
+    let str2Spl = str2.split('');
+    
+    const str1Leng = str1.length;
+    const str2Leng = str2.length;
+    
+    let strArray = "";
+    
+    for ( var i = 0 ; i < str1Leng ; i++ ) {
+        strArray += ( str1Spl[i] + str2Spl[i] );
+    }
+    
+    return strArray;
+}
+```
+
+* += 의 활용
+* 숫자열 + 문자열은 문자열이 된다
+* 문자열 + 문자열은 문자열이 된다
+
 
 <hr>
 
 <br><br>
+
