@@ -103,15 +103,15 @@ function solution(array) {
 ```Javascript
 function solution(str1, str2) {
     
-    let str1Spl = str1.split('');
-    let str2Spl = str2.split('');
+    let str1Spl = str1.split(''); // 배열(문자열)로 자르기 
+    let str2Spl = str2.split(''); // 배열(문자열)로 자르기
     
-    const str1Leng = str1.length;
-    const str2Leng = str2.length;
+    const str1Leng = str1.length; // 배열개수 구하기
+    const str2Leng = str2.length; // 배열개수 구하기
     
-    let strArray = "";
+    let strArray = ""; // 외부 변수 선언
     
-    for ( var i = 0 ; i < str1Leng ; i++ ) {
+    for ( var i = 0 ; i < str1Leng ; i++ ) { // str1 개수만큼 반복
         strArray += ( str1Spl[i] + str2Spl[i] );
     }
     
@@ -119,6 +119,7 @@ function solution(str1, str2) {
 }
 ```
 
+#### ▶ 해설
 * += 의 활용
 * 숫자열 + 문자열은 문자열이 된다
 * 문자열 + 문자열은 문자열이 된다
@@ -127,4 +128,102 @@ function solution(str1, str2) {
 <hr>
 
 <br><br>
+
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+
+
+
+
+2. 홀짝에 따라 다른 값 반환하기 (성공)
+
+function solution(n) {
+    
+    
+    const nDiv = n % 2; // 나머지 구하는 연산자 %
+    let nSum = 0;
+    
+   if (nDiv > 0){
+        //홀수
+       for ( var i = 0 ; i <= n ; i++ ) {
+            if ((i % 2) > 0){
+                nSum += i;
+            }
+        }
+          
+    }else{
+        //짝수
+        for ( var i = 0 ; i <= n ; i++ ) {
+            if ((i % 2) == 0){
+                nSum += i*i;
+            }
+        }
+    }
+    
+    return nSum;
+}
+
+
+
+
+3. 배열 비교하기 (성공)
+
+function solution(arr1, arr2) {
+    
+    // arr1,arr2 배열의 길이
+    const arr1Leng = arr1.length;
+    const arr2Leng = arr2.length;
+    
+    let numSum1 = 0;
+    let numSum2 = 0;
+    
+    let answer = 0;
+    
+    
+    
+    if (arr1Leng == arr2Leng){
+        // 배열길이 같을때 
+        for( var i = 0 ; i < arr1Leng ; i++ ){
+            numSum1 += arr1[i];
+        }
+        for( var v = 0 ; v < arr2Leng ; v++ ){
+            numSum2 += arr2[v];
+        }
+        
+        //원소의 합비교
+        if (numSum1 < numSum2){
+            answer = -1;
+        }else if (numSum1 > numSum2) {
+            answer = 1;
+        }else{
+            answer = 0;
+        }
+        
+    }else{
+        // 배열길이 다를때
+        
+        //배열의 길이
+        if (arr1Leng < arr2Leng){
+            answer = -1;
+        }else if (arr1Leng > arr2Leng) {
+            answer = 1;
+        }else{
+            answer = 0;
+        }
+        
+    }
+    
+    
+    return answer;
+}
 
