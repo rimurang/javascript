@@ -31,10 +31,24 @@ function solution(numbers) {
 }
 ```
 
+#### ▼ forEach로 바꿔보기
 
+```Javascript
+function solution(numbers) {
+    
+    const leng = numbers.length;
+    let nSum = 0;    
 
+    numbers.forEach(function(idx){
+        nSum += idx;
+    })
+    
+    return nSum/leng;
+}
+```
+
+<br><br>
 <hr>
-
 <br><br><br>
 
 ## 7의 개수
@@ -78,9 +92,20 @@ function solution(array) {
 }
 ```
 
+#### ▼ filter 사용, 간략하게 바꿔보기
 
+```Javascript
+function solution(numbers) {
+    
+    const result = array.join('').split('').filter(v => v === '7').length;
+
+    return result;
+    
+}
+```
+
+<br><br>
 <hr>
-
 <br><br><br>
 
 ## 문자열 섞기
