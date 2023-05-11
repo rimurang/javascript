@@ -150,105 +150,115 @@ function solution(str1, str2) {
 * 문자열 + 문자열은 문자열이 된다
 
 
-<hr>
-
 <br><br>
+<hr>
+<br><br><br>
 
-<hr>
-<hr>
-<hr>
-<hr>
-<hr>
-<hr>
-<hr>
-<hr>
-<hr>
-<hr>
-<hr>
-<hr>
+## 중복된 숫자 개수
 
+<a href="https://school.programmers.co.kr/learn/courses/30/lessons/120583" target="_blank" title="문자열  섞기">https://school.programmers.co.kr/learn/courses/30/lessons/120583</a>
 
+#### ▶ 문제 설명
+정수가 담긴 배열 array와 정수 n이 매개변수로 주어질 때, array에 n이 몇 개 있는 지를 return 하도록 solution 함수를 완성해보세요.
+* array = [1,2,3,4,5]	
+* n = 1	
+* result = 2
+* array = [0,2,3,4]	
+* n = 1	
+* result = 0
+<br>
 
-
-2. 홀짝에 따라 다른 값 반환하기 (성공)
-
-function solution(n) {
-    
-    
-    const nDiv = n % 2; // 나머지 구하는 연산자 %
-    let nSum = 0;
-    
-   if (nDiv > 0){
-        //홀수
-       for ( var i = 0 ; i <= n ; i++ ) {
-            if ((i % 2) > 0){
-                nSum += i;
-            }
-        }
-          
-    }else{
-        //짝수
-        for ( var i = 0 ; i <= n ; i++ ) {
-            if ((i % 2) == 0){
-                nSum += i*i;
-            }
-        }
-    }
-    
-    return nSum;
-}
+#### ▶ 제한
+* 1 ≤ array의 길이 ≤ 100<br>
+* 0 ≤ array의 원소 ≤ 1,000<br>
+* 0 ≤ n ≤ 1,000
 
 
-
-
-3. 배열 비교하기 (성공)
-
-function solution(arr1, arr2) {
-    
-    // arr1,arr2 배열의 길이
-    const arr1Leng = arr1.length;
-    const arr2Leng = arr2.length;
-    
-    let numSum1 = 0;
-    let numSum2 = 0;
-    
-    let answer = 0;
-    
-    
-    
-    if (arr1Leng == arr2Leng){
-        // 배열길이 같을때 
-        for( var i = 0 ; i < arr1Leng ; i++ ){
-            numSum1 += arr1[i];
-        }
-        for( var v = 0 ; v < arr2Leng ; v++ ){
-            numSum2 += arr2[v];
-        }
-        
-        //원소의 합비교
-        if (numSum1 < numSum2){
-            answer = -1;
-        }else if (numSum1 > numSum2) {
-            answer = 1;
-        }else{
-            answer = 0;
-        }
-        
-    }else{
-        // 배열길이 다를때
-        
-        //배열의 길이
-        if (arr1Leng < arr2Leng){
-            answer = -1;
-        }else if (arr1Leng > arr2Leng) {
-            answer = 1;
-        }else{
-            answer = 0;
-        }
-        
-    }
-    
-    
+```Javascript
+function solution(array, n) {
+    // filter로 찾기 
+    let answer = array.filter(i => i === 1).length;
     return answer;
 }
+```
 
+#### ▶ 해설
+* filter로 1을 찾는다.
+
+
+<br><br>
+<hr>
+<br><br><br>
+
+## 배열 원소의 길이
+
+<a href="https://school.programmers.co.kr/learn/courses/30/lessons/120854" target="_blank" title="문자열  섞기">https://school.programmers.co.kr/learn/courses/30/lessons/120854</a>
+
+#### ▶ 문제 설명
+문자열 배열 strlist가 매개변수로 주어집니다. strlist 각 원소의 길이를 담은 배열을 retrun하도록 solution 함수를 완성해주세요.
+* strlist = ["We", "are", "the", "world!"]		
+* result = [2, 3, 3, 6]	
+* strlist = ["I", "Love", "Programmers."]		
+* result = [1, 4, 12]	
+<br>
+
+#### ▶ 제한
+* 1 ≤ strlist 원소의 길이 ≤ 100 <br>
+* strlist는 알파벳 소문자, 대문자, 특수문자로 구성되어 있습니다.
+
+
+```Javascript
+function solution(strlist) {
+    
+    let splIdx;
+    let splArr = "";
+    
+    strlist.forEach(function(idx){
+        splIdx = idx.split('').length;
+        splArr += splIdx;
+    })
+    
+    return splArr;
+}
+```
+
+#### ▶ 해설
+* --
+
+
+
+
+<br><br>
+<hr>
+<br><br><br>
+
+## 아이스 아메리카노
+
+<a href="https://school.programmers.co.kr/learn/courses/30/lessons/120819" target="_blank" title="문자열  섞기">https://school.programmers.co.kr/learn/courses/30/lessons/120819</a>
+
+#### ▶ 문제 설명
+머쓱이는 추운 날에도 아이스 아메리카노만 마십니다. 아이스 아메리카노는 한잔에 5,500원입니다. 머쓱이가 가지고 있는 돈 money가 매개변수로 주어질 때, 머쓱이가 최대로 마실 수 있는 아메리카노의 잔 수와 남는 돈을 순서대로 담은 배열을 return 하도록 solution 함수를 완성해보세요.
+* money = 5,500
+* result = [1, 0]
+* money = 15,000
+* result = [2, 4000]
+<br>
+
+#### ▶ 제한
+* 0 < money ≤ 1,000,000
+
+
+```Javascript
+function solution(money) {
+    
+    const coffeePrice = 5500;
+    let coffeeNum = Math.floor(money / coffeePrice);
+    let coffeeChg = money % coffeePrice;
+    
+    var answer = [coffeeNum,coffeeChg];
+    return answer;
+}
+```
+
+#### ▶ 해설
+* --
