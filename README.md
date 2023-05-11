@@ -210,20 +210,39 @@ function solution(array, n) {
 ```Javascript
 function solution(strlist) {
     
-    let splIdx;
-    let splArr = "";
+    let splArr = [];// 변수 배열 선언
     
     strlist.forEach(function(idx){
-        splIdx = idx.split('').length;
-        splArr += splIdx;
+        splArr.push(idx.length);
+        // ? : splArr += idx.length
+        // ? : console.log(typeof splArr)
     })
     
     return splArr;
 }
 ```
-
 #### ▶ 해설
-* --
+* 변수 배열, 스트링 선언 구분 학습
+* 스트링 length는 글자수를 체크함
+* +=와 push 차이 알아두기
+
+
+```Javascript
+function solution(strlist) {
+    
+    return strlist.map(v => v.length)
+    
+}
+```
+#### ▶ 해설
+* map은 리턴이 필요함. 없을경우 undefined
+
+
+```Javascript
+const solution = (strlist) => strlist.map(v => v.length)
+```
+#### ▶ 해설
+* 화살표 함수로 한번에 선언, 실행 가능
 
 
 
