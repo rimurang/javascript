@@ -229,18 +229,28 @@ function solution(strlist) {
 
 ```Javascript
 function solution(strlist) {
-    
     return strlist.map(v => v.length)
-    
 }
 ```
+
 #### ▶ 해설
 * map은 리턴이 필요함. 없을경우 undefined
 
 
 ```Javascript
 const solution = (strlist) => strlist.map(v => v.length)
+// return 정답!
+//화살표 함수는 return이 생략되어있음
+
+const solution = (strlist) => strlist.map(v => {v.length})
+// return undefined
+// 리턴값이 없기때문
+
+const solution = (strlist) => strlist.map(v => {return v.length})
+// return 정답!
+// 리턴값이 있기때문
 ```
+
 #### ▶ 해설
 * 화살표 함수로 한번에 선언, 실행 가능
 
