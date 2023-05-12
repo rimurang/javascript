@@ -177,7 +177,7 @@ function solution(str1, str2) {
 ```Javascript
 function solution(array, n) {
     // filter로 찾기 
-    let answer = array.filter(i => i === 1).length;
+    let answer = array.filter(i => i === n).length;
     return answer;
 }
 ```
@@ -185,6 +185,11 @@ function solution(array, n) {
 #### ▶ 해설
 * filter로 1을 찾는다.
 
+#### ▼ 화살표함수로 간략하게
+
+```Javascript
+const solution = (array, n) => array.filter(i => i === n).length;
+```
 
 <br><br>
 <hr>
@@ -252,7 +257,7 @@ const solution = (strlist) => strlist.map(v => {return v.length})
 ```
 
 #### ▶ 해설
-* 화살표 함수로 한번에 선언, 실행 가능
+* 화살표함수에는 return이 생략되어있음
 
 
 
