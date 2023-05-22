@@ -19,16 +19,22 @@
 
 
 <br><br><br><br>
-### 리액트 = 싱글페이지 애플리케이션
+## 리액트 
+
+#### = 싱글페이지 애플리케이션
+
 데이터와 화면의 일치문제 해결 (ex.닉네임 바꿨는데 다른 화면에서는 안바뀌어있는 무시무시한 경우,,)
 리액트.. 한국에서 대세.. 대세 따라가기
 
 * 새로운 존재가 아닌 리액트도 결국 자바스크립트일뿐이고 이로 html와 css를 만들어내는것
  = 결과물은 html, css, javascript 임
  
+* 리액트는 데이터중심으로 움직임
+ 
 
+<br>
 
-#### 리액트엔 크게 두가지 방식이 있다!
+#### ▶ 리액트엔 크게 두가지 방식이 있다!
 
 !!!! 클래스와 함수 !!!!
 - 근데 클래스는 요즘 거의 안쓰임..(99%).. 그래도 알아두기(예전 작업자에의해 사용되었을지도)
@@ -44,18 +50,18 @@ class LikeButton extends React.Component {
 const LikeButton = () => {};
 function LikeButton() {};
 ```
+<br>
 
+#### ▶ 컴포넌트
 
-#### 컴포넌트
-
-데이터와 화면을 하나로 묶어놓은 덩어리
+데이터와 화면을 하나로 묶어놓은 덩어리 (데이터 중심)
 
 ```Javascript
 // 클래스
 class LikeButton extends React.Component {
  constructor(props){
   super(props);
-  this.state = {Liked. false};
+  this.state = {Liked. false}; // 데이터 (화면의 바뀌는 부분은 state로..)
  }
  render() {
   if (this.state.liked) {
@@ -63,11 +69,18 @@ class LikeButton extends React.Component {
   }
  }
  
- return React.createElement('button', {})
+ return React.createElement('button', {onClick: () => this.setState({liked: true})}, 'Like'); // 화면
  ~~
 }
-
-// 함수
-const LikeButton = () => {};
-function LikeButton() {};
 ```
+
+<br>
+
+#### ⚠️ BUT,, 자바스크립트로만 하다보니 가독성이 안좋음
+
+.
+..
+
+💙리액트 : 그래서 내가 너흴 위해 <u><strong>JSX</strong></u> 문법을 준비했어. 편하게 일하렴💙
+
+
