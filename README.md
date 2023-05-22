@@ -28,3 +28,46 @@
  
 
 
+#### 리액트엔 크게 두가지 방식이 있다!
+
+!!!! 클래스와 함수 !!!!
+- 근데 클래스는 요즘 거의 안쓰임..(99%).. 그래도 알아두기(예전 작업자에의해 사용되었을지도)
+- 함수(화살표함수)를 잘 익혀두자~
+
+```Javascript
+// 클래스
+class LikeButton extends React.Component {
+ ~~
+}
+
+// 함수
+const LikeButton = () => {};
+function LikeButton() {};
+```
+
+
+#### 컴포넌트
+
+데이터와 화면을 하나로 묶어놓은 덩어리
+
+```Javascript
+// 클래스
+class LikeButton extends React.Component {
+ constructor(props){
+  super(props);
+  this.state = {Liked. false};
+ }
+ render() {
+  if (this.state.liked) {
+   return 'You Liked this';
+  }
+ }
+ 
+ return React.createElement('button', {})
+ ~~
+}
+
+// 함수
+const LikeButton = () => {};
+function LikeButton() {};
+```
